@@ -13,9 +13,9 @@ namespace CT.Web.Controllers
     [ApiController]
     public class ShapesController : ControllerBase
     {
-        private readonly IBaseService<Shape> _service;
+        private readonly INamedService<Shape> _service;
 
-        public ShapesController(IBaseService<Shape> service)
+        public ShapesController(INamedService<Shape> service)
         {
             _service = service;
         }

@@ -7,17 +7,18 @@ using CT.Repo.Repositories;
 
 namespace CT.Services
 {
-    public class NamedService<T> : BaseService<T>, INamedService<T> where T: BaseNamedEntity
+    public class FolderService<T> : BaseService<T>, IFolderService<T> where T : CollectionFolder
     {
-        public NamedService(IRepository<T> repository)
-            :base(repository)
+        public FolderService(IRepository<T> repository)
+            : base(repository)
         {
         }
 
         public override async Task UpdateEntity(T entity)
         {
             var e = await _repository.Get(entity.Id);
-            e.Name = entity.Name;
+            e.Description = entity.Description;
+            e.UserId = entity.UserId;
             await _repository.Update(e);
         }
     }

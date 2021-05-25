@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,25 +11,25 @@ namespace CT.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CountriesController : ControllerBase
+    public class CollectionsController : ControllerBase
     {
-        private readonly INamedService<Country> _service;
+        private readonly ICollectionService<Collection> _service;
 
-        public CountriesController(INamedService<Country> service)
+        public CollectionsController(ICollectionService<Collection> service)
         {
             _service = service;
         }
 
-        // GET: api/Countries
+        // GET: api/Collections
         [HttpGet]
-        public async Task<IEnumerable<Country>> GetCountries()
+        public async Task<IEnumerable<Collection>> GetCollections()
         {
             return await _service.GetEntity();
         }
 
-        // GET: api/Countries/5
+        // GET: api/Collections/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Country>> GetCountry(int id)
+        public async Task<ActionResult<Collection>> GetCollection(int id)
         {
             var Country = await _service.GetEntity(id);
 
@@ -41,45 +41,46 @@ namespace CT.Web.Controllers
             return Country;
         }
 
-        // PUT: api/Countries/5
+        // PUT: api/Collections/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<ActionResult<Country>> PutCountry(int id, Country country)
+        public async Task<IActionResult> PutCollection(int id, Collection folder)
         {
-            if (id != country.Id)
+            if (id != folder.Id)
             {
                 return BadRequest();
             }
 
             if (await _service.GetEntity(id) == null)
             {
-                await _service.InsertEntity(country);
+                await _service.InsertEntity(folder);
             }
             else
             {
-                await _service.UpdateEntity(country);
+                await _service.UpdateEntity(folder);
             }
+
             return NoContent();
         }
 
-        // POST: api/Countries
+        // POST: api/Collections
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Country>> PostCountry(Country country)
+        public async Task<ActionResult<Collection>> PostCollection(Collection folder)
         {
-            await _service.InsertEntity(country);
-            return CreatedAtAction("GetCountry", new { id = country.Id }, country);
+            await _service.InsertEntity(folder);
+            return CreatedAtAction("GetCollection", new { id = folder.Id }, folder);
         }
 
-        // DELETE: api/Countries/5
+        // DELETE: api/Collections/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCountry(int id)
+        public async Task<IActionResult> DeleteCollection(int id)
         {
             await _service.DeleteEntity(id);
             return NoContent();
         }
 
-        private bool CountryExists(int id)
+        private bool CollectionExists(int id)
         {
             return _service.GetEntity(id) != null;
         }

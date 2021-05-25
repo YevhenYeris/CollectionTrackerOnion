@@ -15,9 +15,9 @@ namespace CT.Web.Controllers
     [ApiController]
     public class AlloysController : ControllerBase
     {
-        private readonly IBaseService<Alloy> _service;
+        private readonly INamedService<Alloy> _service;
 
-        public AlloysController(IBaseService<Alloy> service)
+        public AlloysController(INamedService<Alloy> service)
         {
             _service = service;
         }

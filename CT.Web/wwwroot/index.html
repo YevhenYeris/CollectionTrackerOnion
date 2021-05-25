@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Currencies</title>
+</head>
+<body>
+    <h3>Add currency</h3>
+
+    <form action="javascript:void(0);" method="POST" onsubmit="addCurrencies()">
+        <input type="text" id="add-name" />
+        <input type="submit" value="Додати" />
+    </form>
+
+    <div id="editCategory">
+        <h3>Edit currency</h3>
+        <form action="javascript:void(0);" onsubmit="updateCurrency()">
+            <input type="hidden" id="edit-id" />
+            <input type="text" id="edit-name" />
+            <input type="submit" value="Зберегти" />
+            <a onclick="closeInput()" aria-label="Close">&times;</a>
+        </form>
+    </div>
+
+    <table>
+        <tr>
+            <th>Name</th>
+        </tr>
+        <tbody id="currencies"></tbody>
+    </table>
+
+    <script src="js/lab2.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        getCurrencies();
+    </script>
+</body>
+</html>

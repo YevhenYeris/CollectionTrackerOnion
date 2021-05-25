@@ -10,8 +10,8 @@ namespace CT.Repo.Repositories
 {
     public class Repository<T> : IRepository<T> where T : BaseEntity
     {
-        private readonly CollectionTrackerContext _context;
-        private DbSet<T> _entities;
+        protected readonly CollectionTrackerContext _context;
+        protected DbSet<T> _entities;
 
         public Repository(CollectionTrackerContext context)
         {
@@ -24,7 +24,7 @@ namespace CT.Repo.Repositories
             return await _entities.ToListAsync();
         }
 
-        public async Task<T> Get(int id)
+        public virtual async Task<T> Get(int id)
         {
             return await _entities.SingleOrDefaultAsync<T>(e => e.Id == id);
         }

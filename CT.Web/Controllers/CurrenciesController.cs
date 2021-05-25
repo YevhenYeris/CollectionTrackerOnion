@@ -13,9 +13,9 @@ namespace CT.Web.Controllers
     [ApiController]
     public class CurrenciesController : ControllerBase
     {
-        private readonly IBaseService<Currency> _service;
+        private readonly INamedService<Currency> _service;
 
-        public CurrenciesController(IBaseService<Currency> service)
+        public CurrenciesController(INamedService<Currency> service)
         {
             _service = service;
         }

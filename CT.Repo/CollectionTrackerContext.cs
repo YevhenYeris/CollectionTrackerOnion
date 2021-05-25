@@ -8,8 +8,13 @@ namespace CT.Repo
 {
     public class CollectionTrackerContext: IdentityDbContext<User>
     {
-        public CollectionTrackerContext(DbContextOptions<CollectionTrackerContext> options)
+        /*public CollectionTrackerContext(DbContextOptions<CollectionTrackerContext> options)
             :base(options)
+        {
+        }*/
+
+        public CollectionTrackerContext(DbContextOptions options)
+            : base(options)
         {
         }
 

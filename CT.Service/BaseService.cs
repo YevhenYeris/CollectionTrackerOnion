@@ -7,7 +7,7 @@ using CT.Repo.Repositories;
 
 namespace CT.Services
 {
-    public abstract class BaseService<T> : IBaseService<T> where T : BaseEntity
+    public class BaseService<T> : IBaseService<T> where T : BaseEntity
     {
         protected readonly IRepository<T> _repository;
 
@@ -34,6 +34,7 @@ namespace CT.Services
         public virtual async Task UpdateEntity(T entity)
         {
             var e = await _repository.Get(entity.Id);
+            e = entity;
             await _repository.Update(e);
         }
 

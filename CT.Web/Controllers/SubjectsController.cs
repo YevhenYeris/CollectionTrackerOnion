@@ -13,9 +13,9 @@ namespace CT.Web.Controllers
     [ApiController]
     public class SubjectsController : ControllerBase
     {
-        private readonly IBaseService<Subject> _service;
+        private readonly INamedService<Subject> _service;
 
-        public SubjectsController(IBaseService<Subject> service)
+        public SubjectsController(INamedService<Subject> service)
         {
             _service = service;
         }

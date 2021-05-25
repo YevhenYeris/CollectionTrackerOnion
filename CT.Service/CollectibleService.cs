@@ -15,37 +15,29 @@ using CT.Repo.Repositories;
 
 namespace CT.Services
 {
-    class CollectibleService<T> : NamedService<T> where T: CollectibleItem
+    public class CollectibleService<T> : NamedService<T>, ICollectibleService<T> where T: CollectibleItem
     {
         public CollectibleService(IRepository<T> repository)
             :base(repository)
         {
         }
 
-        public Task DeleteEntity(int id)
+        public override async Task UpdateEntity(T entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<CollectibleItem>> GetEntity()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<CollectibleItem> GetEntity(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task InsertEntity(CollectibleItem entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task UpdateEntity(CollectibleItem entity)
-        {
+            await base.UpdateEntity(entity);
             var e = await _repository.Get(entity.Id);
-            throw new NotImplementedException();
+            e.IsCommon = entity.IsCommon;
+            e.AddedDate = entity.AddedDate;
+            e.CountryId = entity.CountryId;
+            e.CurrencyId = entity.CurrencyId;
+            e.Description = entity.Description;
+            e.Measuements = entity.Measuements;
+            e.ModifiedDate = entity.ModifiedDate;
+            e.Obverse = entity.Obverse;
+            e.Reverse = entity.Reverse;
+            e.SubjectId = entity.SubjectId;
+            e.Year = entity.Year;
+            await _repository.Update(e);
         }
     }
 }
